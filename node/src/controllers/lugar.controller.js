@@ -23,6 +23,7 @@ function crearLugar(req,res){
     LugarModel.precioTotal = (LugarModel.precioUnidad * LugarModel.focos);
     LugarModel.debe = (LugarModel.precioUnidad * LugarModel.focos);
     LugarModel.año = añoActual
+    LugarModel.estado = 'En Proceso'
 
     if(LugarModel.nombre.length == 0 ||
                         params.apellido.length == 0 ||
@@ -104,9 +105,16 @@ function agregarCuota(req,res){
             if(!cuotaAgregada) return res.status(404).send({report: 'Error pagando'});
             var deuda= cuotaAgregada.debe-params.cantidad
             lugarModel.findByIdAndUpdate(cuotaAgregada._id,{debe:deuda},{new:true},(err,pagado)=>{
+                if(pagado.debe == 0) cuotaTerminada(cuotaAgregada._id)
                 return res.status(200).send(pagado);
             })
         })
+}
+
+async function cuotaTerminada(id){
+    lugarModel.findByIdAndUpdate(id,{estado:'Terminado'},(err,cuotaCancelada)=>{
+        
+    })
 }
 
 module.exports = {
