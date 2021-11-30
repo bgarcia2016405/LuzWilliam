@@ -36,6 +36,7 @@ export class InicioComponent implements OnInit {
         this.getToken();
         this.token=response.token;
         localStorage.setItem('token', JSON.stringify(this.token));
+        this.router.navigate(['/tabla'])
         Swal.fire({
           position: 'center',
           icon: 'success',

@@ -6,11 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './componenet/inicio/inicio.component';
+import { TablaComponent } from './component/tabla/tabla.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent
+    InicioComponent,
+    TablaComponent
   ],
   imports: [
     BrowserModule,

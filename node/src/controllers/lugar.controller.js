@@ -97,8 +97,9 @@ function listarXLugarAño(req,res){
 function agregarCuota(req,res){
     var params = req.body
     var lugar = req.params.lugar;
+    var Year = req.params.Year;
 
-    lugarModel.findOneAndUpdate({año:añoActual,local:lugar},
+    lugarModel.findOneAndUpdate({año:Year,_id:lugar},
                                 { $push: { cuotas: { cantidad: params.cantidad, fecha: fechaActual} } },
         {new: true}, (err,cuotaAgregada)=>{
             if(err) return res.status(404).send({report: 'Error en la petición'});

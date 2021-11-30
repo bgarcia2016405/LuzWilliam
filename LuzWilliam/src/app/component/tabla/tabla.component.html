@@ -1,0 +1,95 @@
+<a  class="btn btn-outline-secondary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" (click)="getIdentidad()">
+  <i class="bi bi-lightning" (click)="getIdentidad()"></i>
+</a>
+<h1 style="text-align: right;">Listado Completo</h1>
+
+<div><br><br>
+  <select class="form-select sele" aria-label="Default select example">
+    <option selected>Año</option>
+    <option value="2021">2021</option>
+    <option value="2022">2022</option>
+  </select>
+  <select class="form-select sele" aria-label="Default select example">
+    <option selected>Local</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+<div *ngIf="state == 'table'"><br><br><br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Local</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Año</th>
+        <th scope="col">Focos</th>
+        <th scope="col" *ngIf="UserService.getIdentidad().type == 'Administrador'">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark Otto</td>
+        <td>2021</td>
+        <td><div class="btn-group">
+          <button type="button" class="btn btn-outline-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Detalles
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item">Num Focos:</a></li>
+            <li><a class="dropdown-item">Precio U:</a></li>
+            <li><a class="dropdown-item" >Total:</a></li>
+            <li><a class="dropdown-item" >Debe:</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Agregar Cuota</a></li>
+          </ul>
+        </div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel" *ngIf="UserService.getIdentidad() != null">{{identidad.nickName}}</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <h3>Agregar Local</h3><br>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="byron" name="nombre" #nombre="ngModel" [(ngModel)]="nuevoLugar.nombre">
+        <label for="floatingInput">Nombre</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="garcia" name="apellido" #apellido="ngModel" [(ngModel)]="nuevoLugar.apellido">
+        <label for="floatingInput">Apellido</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingInput" placeholder="1" name="local" #local="ngModel" [(ngModel)]="nuevoLugar.local">
+        <label for="floatingInput">Numero de local</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingInput" placeholder="1" name="focos" #focos="ngModel" [(ngModel)]="nuevoLugar.focos">
+        <label for="floatingInput">Cantidad de focos</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="number" class="form-control" id="floatingInput" placeholder="1" name="precioUnidad" #precioUnidad="ngModel" [(ngModel)]="nuevoLugar.precioUnidad">
+        <label for="floatingInput">Precio por unidad</label>
+      </div>
+      <button type="button" class="btn btn-primary" data-bs-dismiss="offcanvas" (click)="crearLocal()">Guardar</button>
+    </div>
+  </div>
+</div>

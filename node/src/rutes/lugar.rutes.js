@@ -14,7 +14,7 @@ api.delete('/EliminarLugar/:id', authenticated.ensureAuth, lugarController.elimi
 
 api.get('/ListarXYear/:year', lugarController.listarXAño)
 
-api.get('/ListarXLugarYear/:lugar', lugarController.listarXLugarAño)
+api.get('/ListarXLugarYear/:Year/:lugar', lugarController.listarXLugarAño)
 
 api.put('/PagarCuota/:lugar', lugarController.agregarCuota)
 
