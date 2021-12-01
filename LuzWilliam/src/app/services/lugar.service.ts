@@ -38,17 +38,21 @@ export class LugarService {
   }
 
   ListarXYear(Year){
-    return this.http.get(this.url + '/ListarXYear/' + Year, {headers:this.token})
+    return this.http.get(this.url + '/ListarXYear/' + Year, {headers:this.headers})
   }
 
   ListaXLugarYear(Year,Lugar){
-    return this.http.get(this.url + '/ListarXLugarYear/'+ Year + '/' + Lugar, {headers:this.token})
+    return this.http.get(this.url + '/ListarXLugarYear/'+ Year + '/' + Lugar, {headers:this.headers})
   }
 
   Pago(Lugar,Body){
     let params = JSON.stringify(Body);
 
-    return this.http.put(this.url + '/PagarCuota/' + Lugar, params, {headers:this.token})
+    return this.http.put(this.url + '/PagarCuota/' + Lugar, params, {headers:this.headers})
+  }
+
+  LugarID(id){
+    return this.http.get(this.url + '/ListarLugarID/' + id, {headers:this.headers})
   }
 
    getToken(){

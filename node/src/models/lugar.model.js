@@ -11,7 +11,7 @@ var LugarSchema = Schema({
     precioUnidad: Number,
     precioTotal: Number,
     debe: Number,
-    año: String,
+    year: String,
     cuotas: [{
         cantidad: Number,
         fecha: String

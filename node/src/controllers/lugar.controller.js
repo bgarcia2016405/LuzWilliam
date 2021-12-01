@@ -22,7 +22,7 @@ function crearLugar(req,res){
     LugarModel.precioUnidad = params.precioUnidad;
     LugarModel.precioTotal = (LugarModel.precioUnidad * LugarModel.focos);
     LugarModel.debe = (LugarModel.precioUnidad * LugarModel.focos);
-    LugarModel.año = añoActual
+    LugarModel.year = añoActual
     LugarModel.estado = 'En Proceso'
 
     if(LugarModel.nombre.length == 0 ||
@@ -35,7 +35,7 @@ function crearLugar(req,res){
 
     lugarModel.findOne({
         local: params.local,
-        año: añoActual
+        year: añoActual
     },(err,localEncontrado)=>{
         if(err) return res.status(404).send({report: 'Error al buscar local'});
 
@@ -77,29 +77,29 @@ function eliminar(req,res){
 function listarXAño(req,res){
     var year = req.params.year;
 
-    lugarModel.find({año:year},(err,lugarEncontrado)=>{
+    lugarModel.find({year:year},(err,lugarEncontrado)=>{
         if(err) return res.status(404).send({ report: 'Error en la petición' })
         if(lugarEncontrado == null) return res.status(404).send({ report: 'No se borro el local'})
         return res.status(200).send(lugarEncontrado);
-    })
+    }).sort({local:1})
 }
 
 function listarXLugarAño(req,res){
     var lugar = req.params.lugar;
+    var Year = req.params.Year;
 
-    lugarModel.find({año:añoActual,local:lugar},(err,lugarEncontrado)=>{
+    lugarModel.find({year:Year,local:lugar},(err,lugarEncontrado)=>{
         if(err) return res.status(404).send({ report: 'Error en la petición' })
         if(lugarEncontrado == null) return res.status(404).send({ report: 'No se borro el local'})
         return res.status(200).send(lugarEncontrado);
-    })
+    }).sort({local:1})
 }
 
 function agregarCuota(req,res){
     var params = req.body
     var lugar = req.params.lugar;
-    var Year = req.params.Year;
 
-    lugarModel.findOneAndUpdate({año:Year,_id:lugar},
+    lugarModel.findOneAndUpdate({year:añoActual,local:lugar},
                                 { $push: { cuotas: { cantidad: params.cantidad, fecha: fechaActual} } },
         {new: true}, (err,cuotaAgregada)=>{
             if(err) return res.status(404).send({report: 'Error en la petición'});
@@ -118,11 +118,22 @@ async function cuotaTerminada(id){
     })
 }
 
+function ListarLugarID(req,res){
+    var id = req.params.id;
+
+    lugarModel.findById(id, (err,lugarFound)=>{
+        if(err) return res.status(404).send({report: 'Error en la petición'});
+        if(!lugarFound) return res.status(404).send({report: 'Error buscando'});
+        return res.status(200).send(lugarFound)
+    })
+}
+
 module.exports = {
     crearLugar,
     modificar,
     eliminar,
     listarXAño,
     listarXLugarAño,
-    agregarCuota
+    agregarCuota,
+    ListarLugarID
 }

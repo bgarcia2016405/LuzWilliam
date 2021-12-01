@@ -8,7 +8,7 @@ export class Local{
     public precioUnidad: Number,
     public precioTotal: Number,
     public debe: Number,
-    public año: String,
+    public year: String,
     public estado: String,
     public cuotas:[{
       cantidad:Number,

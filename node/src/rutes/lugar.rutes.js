@@ -16,6 +16,8 @@ api.get('/ListarXYear/:year', lugarController.listarXAño)
 
 api.get('/ListarXLugarYear/:Year/:lugar', lugarController.listarXLugarAño)
 
-api.put('/PagarCuota/:lugar', lugarController.agregarCuota)
+api.put('/PagarCuota/:lugar', lugarController.agregarCuota);
+
+api.get('/ListarLugarID/:id', lugarController.ListarLugarID)
 
 module.exports = api;

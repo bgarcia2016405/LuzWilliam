@@ -16,8 +16,18 @@ export class TablaComponent implements OnInit {
   public token;
   public identidad;
   public user : User;
-  public lugar: Local;
+  public lugar
   public nuevoLugar: Local;
+  public local
+  public Yearr: Local
+  public habilitar
+  public checa
+  public cantidad
+  public pagoLocal
+  public cuotaLocal
+  public pagoca = {
+    cantidad: 0
+  }
 
   constructor(
     public UserService:UserService,
@@ -28,10 +38,15 @@ export class TablaComponent implements OnInit {
     this.user = new User('','','','')
     this.lugar = new Local('','','',0,0,0,0,0,'','',[{cantidad : 0, fecha:''}])
     this.nuevoLugar = new Local('','','',0,0,0,0,0,'','',[{cantidad : 0, fecha:''}])
+    this.Yearr = new Local('','','',0,0,0,0,0,'','',[{cantidad : 0, fecha:''}])
+    this.local = new Local('','','',0,0,0,0,0,'','',[{cantidad : 0, fecha:''}])
+    this.pagoLocal = new Local('','','',0,0,0,0,0,'','',[{cantidad : 0, fecha:''}])
+    this.cuotaLocal = new Local('','','',0,0,0,0,0,'','',[{cantidad : 0, fecha:''}])
   }
 
   ngOnInit(): void {
     this.getIdentidad();
+
   }
 
   getToken(){
@@ -80,6 +95,60 @@ export class TablaComponent implements OnInit {
     this.nuevoLugar.precioUnidad = 0
   }
 
+  onChage(){
+    this.state = 'table'
 
+    this.LugarService.ListarXYear(this.Yearr.year).subscribe(
+      response=>{
+        this.local = response
+        this.lugar = response
+
+        console.log(this.local)
+      }
+    )
+  }
+
+  deshabilitar(){
+    if(this.habilitar == true){
+      this.habilitar = false
+    }else{
+      this.habilitar = true
+    }
+  }
+
+  iniciar(id){
+    this.habilitar = true
+    this.LugarService.LugarID(id).subscribe(
+      response=>{
+        this.pagoLocal = response
+        console.log(response)
+      }
+
+    )
+  }
+
+  pago(){
+    this.LugarService.Pago(this.pagoLocal.local,this.pagoca).subscribe(
+      response=>{
+        console.log(response)
+        this.cuota(this.pagoLocal._id)
+      }
+    )
+  }
+
+  cuota(id){
+    this.state = "textArea"
+    this.LugarService.LugarID(id).subscribe(
+      response=>{
+
+        this.cuotaLocal = response
+      }
+    )
+  }
+
+  regresar(){
+    this.state = "table"
+    window.location.reload();
+  }
 
 }
