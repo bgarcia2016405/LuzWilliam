@@ -46,7 +46,11 @@ export class TablaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIdentidad();
-
+    this.onChage();
+    this.pagoca.cantidad = null
+    this.nuevoLugar.local = null
+    this.nuevoLugar.focos = null
+    this.nuevoLugar.precioUnidad = null
   }
 
   getToken(){
@@ -93,12 +97,13 @@ export class TablaComponent implements OnInit {
     this.nuevoLugar.local = 0
     this.nuevoLugar.focos = 0
     this.nuevoLugar.precioUnidad = 0
+    this.onChage();
   }
 
   onChage(){
     this.state = 'table'
 
-    this.LugarService.ListarXYear(this.Yearr.year).subscribe(
+    this.LugarService.ListarXYear("2021").subscribe(
       response=>{
         this.local = response
         this.lugar = response

@@ -1,15 +1,18 @@
-<a  class="btn btn-outline-secondary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" (click)="getIdentidad()">
+<div class="navbar" >
+  <a  class="btn btn-outline-secondary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" (click)="getIdentidad()">
   <i class="bi bi-lightning" (click)="getIdentidad()"></i>
-</a>
-<h1 style="text-align: right;">Listado Completo</h1>
+  </a><br>
+  <h1 style="text-align: right;">Listado Completo</h1>
+</div>
+
 
 <div><br><br>
-  <select class="form-select sele" aria-label="Default select example"id="year" name="year" #year="ngModel" [(ngModel)]="Yearr.year" (change)="onChage()">
+  <!-- <select class="form-select sele" aria-label="Default select example"id="year" name="year" #year="ngModel" [(ngModel)]="Yearr.year" (change)="onChage()">
     <option selected>Año</option>
     <option value="2021">2021</option>
     <option value="2022">2022</option>
     <option value="2023">2022</option>
-  </select>
+  </select> -->
 
 <div *ngIf="state == 'table'"><br><br><br>
   <table class="table table-striped">
@@ -39,6 +42,17 @@
             <li><hr class="dropdown-divider"></li>
             <li *ngIf="local.debe != 0"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="iniciar(local._id)">Agregar Cuota</a></li>
             <li><a class="dropdown-item" (click)="cuota(local._id)">Pagos</a></li>
+          </ul>
+        </div></td>
+        <td><div class="btn-group">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Action
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" >Editar</a></li>
+            <li><a class="dropdown-item" >Eliminar</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Editar pagos</a></li>
           </ul>
         </div></td>
       </tr>
@@ -87,7 +101,7 @@
           </div>
         </div> <br><br><br><br>
         <div class="form-floating">
-          <input type="number" class="form-control" id="floatingPassword" placeholder="Password" id="cantidad" name="cantidad" #cantidad="ngModel" [(ngModel)]="pagoca.cantidad"  [disabled]='habilitar'>
+          <input type="number" class="form-control"  id="cantidad" name="cantidad" #cantidad="ngModel" [(ngModel)]="pagoca.cantidad"  [disabled]='habilitar'>
           <label for="floatingPassword">Cantidad</label>
         </div>
       </div>
